@@ -5,6 +5,19 @@
     <title>Калькулятор</title>
 </head>
 <body>
+<h1>Привет, я твой персональный калькулятор!</h1>
+<p>Чтобы произвести вычисления, введи в поля ниже два числа и нажми на кнопку "Вычислить", а я уже постараюсь выдать
+    верный результат.
+    Но ничего не обещаю - я ещё молодой, учусь вместе с тобой :)</p>
+<p>Твой учитель сказал, что если ты выполнишь задание, которое он тебе дал, то я смогу сложить введённые тобой числа.</p>
+<div>
+    <div>
+        <div><label for="first">a = </label><input id="first" type="number" placeholder="Первое число"></div>
+        <div><label for="second">b = </label><input id="second" type="number" placeholder="Второе число"></div>
+    </div>
+    <button onclick="document.getElementById('resultField').innerText = calculationResult"><b>ВЫЧИСЛИТЬ</b></button>
+    <div id="resultField">Нажми на кнопку - получишь результат</div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
