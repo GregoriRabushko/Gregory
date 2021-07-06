@@ -8,15 +8,15 @@
  */
 
 function sum() {
- let calculationResult;
-const a = +document.getElementById('first').value;
-const b = +document.getElementById('second').value; 
- calculationResult = a + b; 
- return calculationResult
+  let calculationResult;
+  const a = +document.getElementById("first").value;
+  const b = +document.getElementById("second").value;
+  calculationResult = a + b;
+  return calculationResult;
 }
 
-const setResult = function() {
-    document.getElementById('resultField').innerText = sum().toString();
-}
+const setResult = function () {
+  document.getElementById("resultField").innerText = sum().toString();
+};
 
-document.getElementById('resultButton').onclick = setResult
+document.getElementById("resultButton").onclick = setResult;
