@@ -1,12 +1,30 @@
+const setResult = function (result = 0) {
+    document.getElementById("resultField").innerText = result.toString();
+};
+
 function sum() {
     const firstNumber = +document.getElementById("first").value;
     const secondNumber = +document.getElementById("second").value;
 
-    return firstNumber + secondNumber;
+    // const func = () => {
+    //     console.log(firstNumber)
+    // }
+    //
+    // func();
+
+    const result = firstNumber + secondNumber;
+
+    setResult(result)
 }
 
-const setResult = function () {
-    document.getElementById("resultField").innerText = sum().toString();
-};
+function sub() {
+    const firstNumber = +document.getElementById("first").value;
+    const secondNumber = +document.getElementById("second").value;
 
-document.getElementById("resultButton").onclick = setResult;
+    const result = firstNumber - secondNumber;
+
+    setResult(result)
+}
+
+document.getElementById("sumButton").onclick = sum;
+document.getElementById("subButton").onclick = sub;
