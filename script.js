@@ -35,10 +35,25 @@ function getNumbers() {
     return {firstNumber, secondNumber}
 }
 
+const history = {
+    count: 0
+}
+
 function sum() {
     const {firstNumber: first, secondNumber: second} = getNumbers()
     const result = first + second;
     setResult(result)
+
+    history.count++
+    const key = `operation_${history.count}`; // 'operation_' + history.count
+    history[key] = {
+        first, second, result,
+        toString() {
+            return `${first} + ${second} = ${result}`
+        }
+    }
+    // console.dir(history)
+    // console.log(history[key].toString())
 }
 
 function sub() {
@@ -101,18 +116,23 @@ document.getElementById("multButton").onclick = mult;
 //
 // console.log(comparePeople(vasia, petia))
 
-const vasia = {
-    name: 'Vasia',
-    age: 23,
+// const vasia = {
+//     name: 'Vasia',
+//     age: 23,
+//
+//     toString() {
+//         return `${this.name} ${this.age}`
+//     },
+//
+//     cry() {
+//         return 'I\'m fill bed'
+//     }
+// }
+//
+// console.log(vasia.toString())
+// console.log(vasia.cry())
 
-    toString() {
-        return `${this.name} ${this.age}`
-    },
-
-    cry() {
-        return 'I\'m fill bed'
-    }
-}
-
-console.log(vasia.toString())
-console.log(vasia.cry())
+// const a = {}
+// const key = 'calc_1'
+// a[key] = '2 + 3 = 5'
+// console.log(a)
