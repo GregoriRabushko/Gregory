@@ -29,10 +29,14 @@ function sub() {
 function div() {
     const firstNumber = getFirstNumber();
     const secondNumber = getSecondNumber();
-    // ПРОВЕРКА деления на нуль
-  const result = firstNumber / secondNumber;
+    if (secondNumber === 0){
+      setResult("");
+      alert("на ноль делть нельзя");
+    } else { 
+   const result = firstNumber / secondNumber;
 
   setResult(result)
+}
 }
 
 function mult() {
