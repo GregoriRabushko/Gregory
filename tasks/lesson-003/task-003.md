@@ -2,7 +2,6 @@
 ## Применение знаний об объектах, замыкании и импортах.
 
 ### Задание:
-- выделить функции арифметических операций в отдельный скрипт.
 - добавить объект, хранящий историю вычислений
 
 ### Полезные ссылки:
@@ -10,6 +9,7 @@
 [Symbol](https://learn.javascript.ru/symbol) <br/>
 [Деструктурирующее присваивание](https://learn.javascript.ru/destructuring-assignment) <br/>
 [Преобразование объектов в примитивы](https://learn.javascript.ru/object-toprimitive) <br/>
+
 [Замыкания](https://learn.javascript.ru/closure) <br/>
 [Циклы while и for](https://learn.javascript.ru/while-for) <br/>
 [Конструкция "switch"](https://learn.javascript.ru/switch) <br/>
