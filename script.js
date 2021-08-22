@@ -24,20 +24,16 @@ function sub() {
   const result = firstNumber - secondNumber;
 
   setResult(result)
-};
-
-
-
+}
 
 function div() {
     const firstNumber = getFirstNumber();
     const secondNumber = getSecondNumber();
+    // ПРОВЕРКА деления на нуль
   const result = firstNumber / secondNumber;
 
   setResult(result)
-};
-
-
+}
 
 function mult() {
     const firstNumber = getFirstNumber();
@@ -45,7 +41,7 @@ function mult() {
   const result = firstNumber * secondNumber;
 
   setResult(result)
-};
+}
 
 // function getNumbers() {
 //     const firstNumber = getFirstNumber();
