@@ -2,29 +2,59 @@ const setResult = function (result = 0) {
     document.getElementById("resultField").innerText = result.toString();
 };
 
+function getFirstNumber() {
+    return +document.getElementById("first").value;
+}
+
+function getSecondNumber() {
+    return +document.getElementById("second").value;
+}
+
 function sum() {
-    const firstNumber = +document.getElementById("first").value;
-    const secondNumber = +document.getElementById("second").value;
-
-    // const func = () => {
-    //     console.log(firstNumber)
-    // }
-    //
-    // func();
-
+    const firstNumber = getFirstNumber();
+    const secondNumber = getSecondNumber();
     const result = firstNumber + secondNumber;
-
     setResult(result)
 }
 
 function sub() {
-    const firstNumber = +document.getElementById("first").value;
-    const secondNumber = +document.getElementById("second").value;
-
+    const firstNumber = getFirstNumber();
+    const secondNumber = getSecondNumber();
     const result = firstNumber - secondNumber;
-
     setResult(result)
 }
+
+// function getNumbers() {
+//     const firstNumber = getFirstNumber();
+//     const secondNumber = getSecondNumber();
+//
+//     return {firstNumber: firstNumber, secondNumber: secondNumber}
+// }
+//
+// function sum() {
+//     const values = getNumbers()
+//     const result = values.firstNumber + values['secondNumber'];
+//     setResult(result)
+// }
+//
+// function getNumbers() {
+//     const firstNumber = getFirstNumber();
+//     const secondNumber = getSecondNumber();
+//
+//     return {firstNumber, secondNumber}
+// }
+//
+// function sum() {
+//     const {firstNumber, secondNumber} = getNumbers()
+//     const result = firstNumber + secondNumber;
+//     setResult(result)
+// }
+//
+// function sub() {
+//     const {firstNumber, secondNumber} = getNumbers()
+//     const result = firstNumber - secondNumber;
+//     setResult(result)
+// }
 
 document.getElementById("sumButton").onclick = sum;
 document.getElementById("subButton").onclick = sub;
