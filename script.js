@@ -14,15 +14,38 @@ function sum() {
     const firstNumber = getFirstNumber();
     const secondNumber = getSecondNumber();
     const result = firstNumber + secondNumber;
+
     setResult(result)
 }
 
 function sub() {
     const firstNumber = getFirstNumber();
     const secondNumber = getSecondNumber();
-    const result = firstNumber - secondNumber;
-    setResult(result)
-}
+  const result = firstNumber - secondNumber;
+
+  setResult(result)
+};
+
+
+
+
+function div() {
+    const firstNumber = getFirstNumber();
+    const secondNumber = getSecondNumber();
+  const result = firstNumber / secondNumber;
+
+  setResult(result)
+};
+
+
+
+function mult() {
+    const firstNumber = getFirstNumber();
+    const secondNumber = getSecondNumber();
+  const result = firstNumber * secondNumber;
+
+  setResult(result)
+};
 
 // function getNumbers() {
 //     const firstNumber = getFirstNumber();
@@ -58,3 +81,5 @@ function sub() {
 
 document.getElementById("sumButton").onclick = sum;
 document.getElementById("subButton").onclick = sub;
+document.getElementById("divButton").onclick = div;
+document.getElementById("multButton").onclick = mult;
