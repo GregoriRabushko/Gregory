@@ -21,13 +21,14 @@ const history = {
     count: 0
 }
 
+//        addRecordToHistory(10,     15,     25,     '+')
 function addRecordToHistory(first, second, result, operator) {
     history.count++
     const key = `operation_${history.count}`; // 'operation_' + history.count
     history[key] = {
         first, second, result, operator,
         toString() {
-            return `${first} ${operator} ${second} = ${result}`
+            return `${this.first} ${this.operator} ${this.second} = ${this.result}` // 10 + 15 = 25
         },
         toHtmlListItem() {
             return `<li>${this.first} ${this.operator} ${this.second} = ${this.result}</li>>`
@@ -36,6 +37,19 @@ function addRecordToHistory(first, second, result, operator) {
             return `<tr><td>${this.first}</td><td>${this.operator}</td><td>${this.second}</td><td>${this.result}</td></tr>>`
         }
     }
+
+    /*
+    history = {
+      count: 1,
+      operation_1: {
+        first: 10,
+        second: 15,
+        result: 25,
+        operator: '+'
+      }
+
+    }
+     */
 }
 
 function sum() {
