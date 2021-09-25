@@ -8,12 +8,12 @@
   </head>
   <body>
     <h1>Привет, я твой персональный калькулятор!</h1>
-    <p class="FirstP">
+    <p class="firstP">
       Чтобы произвести вычисления, введи в поля ниже два числа и нажми на кнопку
       "Вычислить", а я уже постараюсь выдать верный результат. Но ничего не
       обещаю - я ещё молодой, учусь вместе с тобой :)
     </p>
-    <p class="FirstP">
+    <p class="firstP">
       Твой учитель сказал, что если ты выполнишь задание, которое он тебе дал,
       то я смогу сложить введённые тобой числа.
     </p>
@@ -21,18 +21,19 @@
       <div>
         <div>
           <label  for="first">a = </label
-          ><input id="first" class="firstCSS" type="number" placeholder="Первое число" />
+          ><input id="first" type="number" placeholder="Первое число" />
         </div>
         <div>
           <label for="second">b = </label
-          ><input id="second" class="secondCSS" type="number" placeholder="Второе число" />
+          ><input id="second" type="number" placeholder="Второе число" />
         </div>
       </div>
       <button id="sumButton"><b>+</b></button>
       <button id="subButton"><b>-</b></button>
       <button id="divButton"><b>/</b></button>
       <button id="multButton"><b>*</b></button>
-      <div id="resultField" class="Div1">Нажми на кнопку - получишь результат</div>
+      <div id="resultField">Нажми на кнопку - получишь результат</div>
+      <div id="historiCol">История вычислений</div>
     </div>
     <script src="script.js"></script>
   </body>

@@ -3,43 +3,13 @@ h1 {
 }
 
 
-.FirstP {
+.firstP {
 text-align: center;
-opacity: none;
 }
 
 
 button {
 text-align: center;
-}
-
-
-
-input {
-    text-align: center;
-}
-
-
-
-.Div1 {
-    text-align: center;
-}
-
-
-
-.Lable1 {
-text-align: center;
-}
-
-
-
-.Lable2 {
-text-align: center;
-}
-
-
-.firstCSS ,.secondCSS {
-    color: #000;
 }
 
 

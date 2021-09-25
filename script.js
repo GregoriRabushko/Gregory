@@ -2,6 +2,7 @@ const setResult = function (result = 0) {
     document.getElementById("resultField").innerText = result.toFixed(4);
 };
 
+
 function getFirstNumber() {
     return +document.getElementById("first").value;
 }
@@ -22,8 +23,8 @@ function getSecondNumber() {
 // }
 //
 // function sum() {
-//     const values = getNumbers()
-//     const fieldName = 'secondNumber'
+    //     const values = getNumbers()
+    //     const fieldName = 'secondNumber'
 //     const result = values.firstNumber + values[fieldName];
 //     setResult(result)
 // }
@@ -52,39 +53,71 @@ function sum() {
             return `${first} + ${second} = ${result}`
         }
     }
-    // console.dir(history)
-    // console.log(history[key].toString())
+     console.dir(history)
+   //  console.log(history[key].toString())
 }
 
 function sub() {
-    const {firstNumber, secondNumber} = getNumbers()
-    const result = firstNumber - secondNumber;
+    const {firstNumber: first, secondNumber: second} = getNumbers()
+    const result = first - second;
     setResult(result)
+    
+    history.count++
+    const key = `operation_${history.count}`; // 'operation_' + history.count
+    history[key] = {
+        first, second, result,
+        toString() {
+            return `${first} - ${second} = ${result}`
+        }
+    }
+    console.dir(history)
 }
 
 function div() {
-    const {firstNumber, secondNumber} = getNumbers()
-    if (secondNumber === 0) {
+    const {firstNumber: first, secondNumber: second} = getNumbers()
+    if (second === 0) {
         setResult("");
         alert("на ноль делить нельзя");
     } else {
-        const result = firstNumber / secondNumber;
+        const result = first / second;
 
         setResult(result)
+
+        history.count++
+        const key = `operation_${history.count}`;
+        history[key] = {
+            first, second, result,
+            toString() {
+                return `${first} / ${second} = ${result}`
+            }
+        }
     }
+    console.dir(history)
 }
 
 function mult() {
-    const {firstNumber, secondNumber} = getNumbers()
-    const result = firstNumber * secondNumber;
-
+    const {firstNumber: first, secondNumber: second} = getNumbers()
+    const result = first * second;
+    
     setResult(result)
+    
+    history.count++
+    const key = `operation_${history.count}`;
+    history[key] = {
+        first, second, result,
+        toString() {
+            return `${first} / ${second} = ${result}`
+        }
+    }
+    console.dir(history)
 }
+
 
 document.getElementById("sumButton").onclick = sum;
 document.getElementById("subButton").onclick = sub;
 document.getElementById("divButton").onclick = div;
 document.getElementById("multButton").onclick = mult;
+
 
 // let a = {}
 // console.log('a=',a)
@@ -97,7 +130,7 @@ document.getElementById("multButton").onclick = mult;
 
 // const a = {}
 // const b = {}
-//
+
 // console.log(a === b)
 
 // const vasia = {
@@ -116,19 +149,20 @@ document.getElementById("multButton").onclick = mult;
 //
 // console.log(comparePeople(vasia, petia))
 
+
 // const vasia = {
 //     name: 'Vasia',
 //     age: 23,
-//
+
 //     toString() {
 //         return `${this.name} ${this.age}`
 //     },
-//
+
 //     cry() {
 //         return 'I\'m fill bed'
 //     }
 // }
-//
+
 // console.log(vasia.toString())
 // console.log(vasia.cry())
 
