@@ -1,4 +1,8 @@
 const setResult = function (result = 0) {
+    if (result === "") {
+        document.getElementById("resultField").innerText = result;
+        return;
+    }
     document.getElementById("resultField").innerText = result.toFixed(4);
 };
 
