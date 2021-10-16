@@ -126,14 +126,13 @@ document.getElementById("subButton").onclick = sub;
 document.getElementById("divButton").onclick = div;
 document.getElementById("multButton").onclick = mult;
 
-
-const a = {
-    x: {
-        y: 2, // 5
-        z: '3'
-    }
-}
-
-const c = {...a};
-
-c.x.y = 5
+// const a = {
+//     x: {
+//         y: 2, // 5
+//         z: '3'
+//     }
+// }
+//
+// const c = {...a};
+//
+// c.x.y = 5
