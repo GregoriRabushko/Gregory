@@ -1,4 +1,8 @@
 const setResult = function (result = 0) {
+    if (result==="") {
+        document.getElementById("resultField").innerText = result;
+        return;
+    }
     document.getElementById("resultField").innerText = result.toFixed(4);
 };
 
@@ -80,7 +84,6 @@ function div() {
         alert("на ноль делить нельзя");
     } else {
         const result = first / second;
-
         setResult(result)
 
         history.count++
@@ -106,7 +109,7 @@ function mult() {
     history[key] = {
         first, second, result,
         toString() {
-            return `${first} / ${second} = ${result}`
+            return `${first} * ${second} = ${result}`
         }
     }
     console.dir(history)

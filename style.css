@@ -8,9 +8,9 @@ text-align: center;
 }
 
 
-button {
+/* button {
 text-align: center;
-}
+} */
 
 
 
@@ -23,4 +23,57 @@ body {
     margin: auto;
     margin-top: 300px;
 
+}
+
+/* ButtonCss */
+.sumBut {
+    padding: 10px;
+}
+
+.subBut {
+    padding: 10px;
+}
+
+.multBut {
+    padding: 10px;
+}
+
+.divBut {
+    padding: 10px;
+}
+
+.ButOne {
+    padding: 20px;
+}
+
+.ButTwo {
+    padding: 20px;
+}
+
+.ButThree {
+    padding: 20px;
+}
+
+.ButFour {
+    padding: 20px;
+}
+
+.ButFive {
+    padding: 20px;
+}
+
+.ButSix {
+    padding: 20px;
+}
+
+.ButSeven {
+    padding: 20px;
+}
+
+.ButEight {
+    padding: 20px;
+}
+
+.ButNine {
+    padding: 20px;
 }
