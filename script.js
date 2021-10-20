@@ -15,23 +15,6 @@ function getSecondNumber() {
     return +document.getElementById("second").value;
 }
 
-//
-// function getNumbers() {
-//     const firstNumber = getFirstNumber();
-//     const secondNumber = getSecondNumber();
-//
-//     return {
-//         firstNumber: firstNumber,
-//         secondNumber: secondNumber
-//     }
-// }
-//
-// function sum() {
-    //     const values = getNumbers()
-    //     const fieldName = 'secondNumber'
-//     const result = values.firstNumber + values[fieldName];
-//     setResult(result)
-// }
 
 function getNumbers() {
     const firstNumber = getFirstNumber();
@@ -44,38 +27,45 @@ const history = {
     count: 0
 }
 
+function historyCol(first, second, result, operator) {
+    history.count++
+    const key = `operation_${history.count}`;
+    history[key] = {
+        first, second, result, operator,
+        toString() {
+            return `${first} ${operator} ${second} = ${result}`
+        }
+    }
+}
+
+const logHistory = function () {
+    console.log('=====BEGIN HISTORI=====');
+    for (const key in history) {
+        if (key === 'count') {
+            continue;
+        }
+        console.log(`${key}: `, history[key]) 
+    }
+    console.log('=====END HISTORI=====');
+}
+
 function sum() {
     const {firstNumber: first, secondNumber: second} = getNumbers()
     const result = first + second;
-    setResult(result)
-
-    history.count++
-    const key = `operation_${history.count}`; // 'operation_' + history.count
-    history[key] = {
-        first, second, result,
-        toString() {
-            return `${first} + ${second} = ${result}`
-        }
+    setResult(result);
+    historyCol(first,  second, result, '+');
+    logHistory();
     }
-     console.dir(history)
-   //  console.log(history[key].toString())
-}
+
 
 function sub() {
     const {firstNumber: first, secondNumber: second} = getNumbers()
     const result = first - second;
+
     setResult(result)
-    
-    history.count++
-    const key = `operation_${history.count}`; // 'operation_' + history.count
-    history[key] = {
-        first, second, result,
-        toString() {
-            return `${first} - ${second} = ${result}`
+    historyCol(first, '-', second, result);
+    logHistory ();
         }
-    }
-    console.dir(history)
-}
 
 function div() {
     const {firstNumber: first, secondNumber: second} = getNumbers()
@@ -84,35 +74,20 @@ function div() {
         alert("на ноль делить нельзя");
     } else {
         const result = first / second;
-        setResult(result)
 
-        history.count++
-        const key = `operation_${history.count}`;
-        history[key] = {
-            first, second, result,
-            toString() {
-                return `${first} / ${second} = ${result}`
+        setResult(result)
+        historyCol(first, '/', second, result);
+        logHistory ();
             }
         }
-    }
-    console.dir(history)
-}
 
 function mult() {
     const {firstNumber: first, secondNumber: second} = getNumbers()
     const result = first * second;
     
     setResult(result)
-    
-    history.count++
-    const key = `operation_${history.count}`;
-    history[key] = {
-        first, second, result,
-        toString() {
-            return `${first} * ${second} = ${result}`
-        }
-    }
-    console.dir(history)
+    historyCol(first, "*", second, result);
+    logHistory ();
 }
 
 
