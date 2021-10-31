@@ -136,3 +136,82 @@ document.getElementById("multButton").onclick = mult;
 // const c = {...a};
 //
 // c.x.y = 5
+
+const arr = [];
+
+arr.push({
+    amount: 5,
+    key: '1', toString() {
+        return this.key;
+    }
+});
+arr.push({
+    amount: 5,
+    key: '22', toString() {
+        return this.key;
+    }
+}, {
+    amount: 5,
+    key: '3', toString() {
+        return this.key;
+    }
+});
+arr.unshift({
+    amount: 5,
+    key: '11', toString() {
+        return this.key;
+    }
+});
+// console.log(arr.join(', ').split(', '));
+
+// console.log(arr.slice(1, 3)); // don't mutate
+// console.log(arr.splice(1, 3)); // mutate
+
+// console.log(arr.find(el => el.key.includes('1'))); // don't mutate
+// console.log(arr.filter(el => el.key.includes('1'))); // don't mutate
+
+// arr.fill('sorry');
+
+// function f(el, index, arr) {
+//     console.log('El: ', el , 'ndx: ', index);
+//     console.dir(arr);
+// }
+
+// function f2(el, index, arr) {
+//     // el.key = '0';
+//     return `${el.key} ${index} ${arr.length}`;
+// }
+
+// arr.forEach(f);
+// console.log(arr.map(f2));
+
+const INITIAL_AMOUNT = 0;
+const calculateTotalAmount = (acc, el, ind, arr) => {
+    acc += el.amount;
+    return acc;
+}
+
+console.log(arr.reduce(calculateTotalAmount, INITIAL_AMOUNT));
+
+// arr.sort((a, b) => {
+//     return b.key - a.key;
+// });
+
+// arr.reverse();
+
+console.dir(arr);
+
+// for (let i = 0; i < arr.length; i++) {
+//     console.log(arr[i]);
+// }
+
+// let i = 0;
+// while (i < arr.length) {
+//     console.log(arr[i]);
+//     i++;
+// }
+
+// do {
+//     console.log(arr[i]);
+//     i++;
+// } while (i < arr.length)
