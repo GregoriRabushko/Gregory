@@ -177,13 +177,16 @@ arr.unshift({
 //     console.dir(arr);
 // }
 
+// arr.forEach(f);
+
 // function f2(el, index, arr) {
 //     // el.key = '0';
 //     return `${el.key} ${index} ${arr.length}`;
 // }
 
-// arr.forEach(f);
-// console.log(arr.map(f2));
+// console.log(arr
+//     .map(f2)
+//     .filter(el => el.includes('1')));
 
 const INITIAL_AMOUNT = 0;
 const calculateTotalAmount = (acc, el, ind, arr) => {
