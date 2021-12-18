@@ -218,3 +218,119 @@ console.dir(arr);
 //     console.log(arr[i]);
 //     i++;
 // } while (i < arr.length)
+
+// const names = ['apple', 'lemon', 'grape', 'potatoes']
+// const prices = [108, 220, 58, 55];
+//
+// // const unSortedPrices = [...prices];
+// // prices.sort((a, b) => a - b);
+// // const index = unSortedPrices.indexOf(prices[0]);
+// // console.log(names[index]);
+//
+// function searchIndexOfLowestPrice(arr) {
+//     let index = -1;
+//     let lowestPrice;
+//     arr.forEach(
+//         (price, currentIndex) => {
+//             if (currentIndex === 0 || price < lowestPrice) {
+//                 index = currentIndex;
+//                 lowestPrice = price;
+//             }
+//         }
+//     )
+//
+//     return index;
+// }
+//
+// console.log(names[searchIndexOfLowestPrice(prices)]);
+
+const products = [
+    {name: 'apple', price: 105, isPresent: true},
+    {name: 'lemon', price: 250, isPresent: false},
+    {name: 'bananas', price: 58, isPresent: true},
+    {name: 'potatoes', price: 55, isPresent: true},
+]
+
+// let tableHtml = '<table>'
+//
+// // create header (tableHtml += '....')
+//
+// tableHtml += '<tbody>'
+// products.forEach(
+//     product => {
+//         tableHtml +=
+//             `<tr>
+//                 <td>${product.name}</td>
+//                 <td>${product.price}</td>
+//                 <td>${product.isPresent ? 'present' : 'not present'}</td>
+//             </tr>`;
+//     }
+// );
+// tableHtml += '</tbody>'
+//
+// tableHtml += '</table>'
+
+const headers = [
+    'name',
+    'price',
+    'is present',
+]
+const tableContainer = document.getElementById('tableContainer');
+
+const table = document.createElement('table');
+// tableContainer.appendChild(table);
+
+const headerRow = table.createTHead().insertRow();
+headers.forEach(
+    title => {
+        headerRow.insertCell().innerText = title;
+    }
+);
+
+const tableBody = table.createTBody();
+products.forEach(
+    product => {
+        const bodyRow = tableBody.insertRow();
+
+        bodyRow.insertCell().innerText = product.name;
+        bodyRow.insertCell().innerText = `${product.price}`;
+        bodyRow.insertCell().innerText = product.isPresent ? 'present' : 'not present';
+    }
+);
+
+// const header = document.createElement('thead');
+// const headerRow = document.createElement('tr');
+// headers.forEach(
+//     title => {
+//         const headerTitleElement = document.createElement('th');
+//         headerTitleElement.innerText = title;
+//         headerRow.appendChild(headerTitleElement);
+//     }
+// )
+// header.appendChild(headerRow);
+//
+// const tableBody = document.createElement('tbody');
+// products.forEach(
+//     product => {
+//         const bodyRow = document.createElement('tr');
+//
+//         const bodyNameElement = document.createElement('td');
+//         bodyNameElement.innerText = product.name;
+//
+//         const bodyPriceElement = document.createElement('td');
+//         bodyPriceElement.innerText = `${product.price}`;
+//
+//         const bodyStateElement = document.createElement('td');
+//         bodyStateElement.innerText = product.isPresent ? 'present' : 'not present';
+//
+//         bodyRow.appendChild(bodyNameElement);
+//         bodyRow.appendChild(bodyPriceElement);
+//         bodyRow.appendChild(bodyStateElement);
+//
+//         tableBody.appendChild(bodyRow);
+//     }
+// );
+//
+// table.appendChild(header);
+// table.appendChild(tableBody);
+tableContainer.appendChild(table);
