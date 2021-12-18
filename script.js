@@ -137,31 +137,31 @@ document.getElementById("multButton").onclick = mult;
 //
 // c.x.y = 5
 
-const arr = [];
+// const arr = [];
 
-arr.push({
-    amount: 5,
-    key: '1', toString() {
-        return this.key;
-    }
-});
-arr.push({
-    amount: 5,
-    key: '22', toString() {
-        return this.key;
-    }
-}, {
-    amount: 5,
-    key: '3', toString() {
-        return this.key;
-    }
-});
-arr.unshift({
-    amount: 5,
-    key: '11', toString() {
-        return this.key;
-    }
-});
+// arr.push({
+//     amount: 5,
+//     key: '1', toString() {
+//         return this.key;
+//     }
+// });
+// arr.push({
+//     amount: 5,
+//     key: '22', toString() {
+//         return this.key;
+//     }
+// }, {
+//     amount: 5,
+//     key: '3', toString() {
+//         return this.key;
+//     }
+// });
+// arr.unshift({
+//     amount: 5,
+//     key: '11', toString() {
+//         return this.key;
+//     }
+// });
 // console.log(arr.join(', ').split(', '));
 
 // console.log(arr.slice(1, 3)); // don't mutate
@@ -188,13 +188,13 @@ arr.unshift({
 //     .map(f2)
 //     .filter(el => el.includes('1')));
 
-const INITIAL_AMOUNT = 0;
-const calculateTotalAmount = (acc, el, ind, arr) => {
-    acc += el.amount;
-    return acc;
-}
+// const INITIAL_AMOUNT = 0;
+// const calculateTotalAmount = (acc, el, ind, arr) => {
+//     acc += el.amount;
+//     return acc;
+// }
 
-console.log(arr.reduce(calculateTotalAmount, INITIAL_AMOUNT));
+// console.log(arr.reduce(calculateTotalAmount, INITIAL_AMOUNT));
 
 // arr.sort((a, b) => {
 //     return b.key - a.key;
@@ -202,7 +202,7 @@ console.log(arr.reduce(calculateTotalAmount, INITIAL_AMOUNT));
 
 // arr.reverse();
 
-console.dir(arr);
+// console.dir(arr);
 
 // for (let i = 0; i < arr.length; i++) {
 //     console.log(arr[i]);
