@@ -194,7 +194,7 @@ const calculateTotalAmount = (acc, el, ind, arr) => {
     return acc;
 }
 
-console.log(arr.reduce(calculateTotalAmount, INITIAL_AMOUNT));
+// console.log(arr.reduce(calculateTotalAmount, INITIAL_AMOUNT));
 
 // arr.sort((a, b) => {
 //     return b.key - a.key;
@@ -202,7 +202,7 @@ console.log(arr.reduce(calculateTotalAmount, INITIAL_AMOUNT));
 
 // arr.reverse();
 
-console.dir(arr);
+// console.dir(arr);
 
 // for (let i = 0; i < arr.length; i++) {
 //     console.log(arr[i]);
@@ -244,12 +244,33 @@ console.dir(arr);
 //
 // console.log(names[searchIndexOfLowestPrice(prices)]);
 
+const sortProductsByPresenting = (product1, product2) => {
+    if (product1.isPresent === true && product2.isPresent === false) return -1;
+    if (product1.isPresent === false && product2.isPresent === true) return 1;
+    if (product1.isPresent === product2.isPresent) return 0;
+    // return product1 - product2;
+}
+
 const products = [
     {name: 'apple', price: 105, isPresent: true},
     {name: 'lemon', price: 250, isPresent: false},
     {name: 'bananas', price: 58, isPresent: true},
     {name: 'potatoes', price: 55, isPresent: true},
-]
+].sort((p1, p2) => p1.price - p2.price);
+
+function findProductWithMinimalPrice(checkedProducts) {
+    let foundedProduct;
+    checkedProducts.forEach(currentProduct => {
+        if (foundedProduct === undefined
+            || foundedProduct.price > currentProduct.price) {
+            foundedProduct = {...currentProduct};
+        }
+    });
+
+    return foundedProduct;
+}
+
+const product = findProductWithMinimalPrice(products);
 
 // let tableHtml = '<table>'
 //
@@ -334,3 +355,92 @@ products.forEach(
 // table.appendChild(header);
 // table.appendChild(tableBody);
 tableContainer.appendChild(table);
+
+class BaseShopProductClass {
+    #name;
+    static DEFAULT_SCLAD = 'Default sclad';
+
+    static #productsCounter = 0;
+
+    constructor(name, price, isPresent) {
+        this.#name = name;
+        this.price = price;
+        this.isPresent = isPresent;
+        BaseShopProductClass.#productsCounter++;
+    }
+
+    static NumberOfProducts() {
+        return this.#productsCounter;
+    }
+    static get productsCounter() {
+        return this.#productsCounter;
+    }
+
+    // setName(name) {
+    //     if (!!name && typeof name === 'string') {
+    //         this.#name = name;
+    //     }
+    //
+    //     throw Error('Incorrect name!!!');
+    // }
+
+    set name(name) {
+        if (!!name && typeof name === 'string') {
+            this.#name = name;
+        } else {
+            throw Error('Incorrect name!!!');
+        }
+    }
+
+    get name() {
+        return this.#name;
+    }
+}
+
+class ShopProductWithCurrency extends BaseShopProductClass{
+    constructor(name, price, isPresent, scladName) {
+        super(name, price, isPresent);
+
+        this.scladName = scladName ?? BaseShopProductClass.DEFAULT_SCLAD;
+    }
+
+    getPriceInUSD(currency) {
+        if (currency) {
+            return this.price / currency;
+        }
+
+        throw Error('Currency is required!!!');
+    }
+}
+
+const apple = new ShopProductWithCurrency('Apple', 10, true);
+const orange = new ShopProductWithCurrency('Orange', 20, false);
+const macadamia = new ShopProductWithCurrency('Macadamia', 100, true);
+apple.name = '12345';
+const priceInUsd = apple.getPriceInUSD(2.5);
+console.log(priceInUsd);
+console.log(apple);
+console.log(BaseShopProductClass.NumberOfProducts())
+console.log(BaseShopProductClass.productsCounter);
+
+// function ShopProduct(name, price, isPresent) {
+//     this.name = name;
+//     this.price = price;
+//     this.isPresent = isPresent;
+//
+//     this.getPriceInUSD = function (currency) {
+//         if (currency) {
+//             return this.price / currency;
+//         }
+//
+//         throw Error('Currency is required!!!');
+//     }
+// }
+//
+// const apple = new ShopProduct('Apple', 10, true);
+// console.log(apple.getPriceInUSD(2.5))
+
+const copy = Object.assign(Object.create(Object.getPrototypeOf(apple)), apple);
+console.log(copy);
+// console.log(copy.name);
+console.log(copy.getPriceInUSD(2.5));
