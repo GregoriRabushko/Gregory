@@ -1,14 +1,17 @@
-const someString = '55+22*2';
-// const someString = 'alert("OOPs!")';
+// const rawString = 'alert("OOPs!")';
+const rawString = '55*(22-2)/2+(5/((-8)-2)*(-3))'
+const clearString = rawString.replace(/\s+/, '');
+console.log(clearString);
 
-// function calculateExpressionFromString(inputData) {
-//     const validator = new RegExp(/^(\d|\+|-|\*|\/|\(|\))+$/g);
-//     if (validator.test(inputData)) {
-//         return eval(inputData);
-//     }
-// }
-//
-// console.log(calculateExpressionFromString(someString));
+
+function calculateExpressionFromString(inputData) {
+    const validator = new RegExp(/^(\d|\+|-|\*|\/|\(|\))+$/g);
+    if (validator.test(inputData)) {
+        return eval(inputData);
+    }
+}
+
+console.log('Eval: ', calculateExpressionFromString(clearString));
 
 /*
 operators +,-,*,/,(,)
@@ -20,27 +23,39 @@ operators +,-,*,/,(,)
 5. 2*(22-2)+55
 6. 55+(22-2)*2-5
 7. 55*(22-2)/2+(5/(5+2)*3)
-
-function calculateTwoOperators(a,b,op);
-function parseExpressionString(s);
+8. 55*(22-2)/2+(5/((-8)-2)*(-3))
 
  */
 
-function calculateExpressionFromCharsArray(charsArray = []) {
+function calculateCharsArrayWithBrackets(charsArray = [], returnOnCloseBracket = false) {
     const expressionArray = [];
 
+    let countOfOpenedBrackets = 0;
     for (let currentIndex = 0; currentIndex < charsArray.length; currentIndex++) {
         const char = charsArray[currentIndex];
         switch (char) {
             case ('('):
-                expressionArray.push(
-                    calculateExpressionFromCharsArray(charsArray.slice(currentIndex + 1, charsArray.length)).toString()
-                );
+                countOfOpenedBrackets++;
+                returnOnCloseBracket = false;
+                if (countOfOpenedBrackets === 1) {
+                    expressionArray.push(
+                        calculateCharsArrayWithBrackets(charsArray.slice(currentIndex + 1, charsArray.length), true)
+                            .toString()
+                    );
+                }
                 break;
             case (')'):
-                return calculateCharsArrayWithoutBrackets(expressionArray);
+                if (countOfOpenedBrackets > 0) {
+                    countOfOpenedBrackets--;
+                }
+                if (countOfOpenedBrackets === 0 && returnOnCloseBracket) {
+                    return calculateCharsArrayWithoutBrackets(expressionArray);
+                }
+                break;
             default:
-                expressionArray.push(char);
+                if (countOfOpenedBrackets === 0) {
+                    expressionArray.push(char);
+                }
                 break;
         }
     }
@@ -51,70 +66,51 @@ function calculateExpressionFromCharsArray(charsArray = []) {
 function calculateCharsArrayWithoutBrackets(charsArray = []) {
     const arrayLength = charsArray.length;
     if (arrayLength === 0) {
-        return 0;
+        return NaN;
     }
 
     if (arrayLength === 1 && !isNaN(Number(charsArray[0]))) {
         return Number(charsArray[0]);
     }
 
-    // 55*(22-6/5-2)/2+(5/(5+2)*3)
+    const arguments = [];
+    const operators = [];
 
-    let firstArgument = '';
-    let secondArgument = '';
-    let thirdArgument = '';
-    let firstOperator = '';
-    let secondOperator = '';
-
-    charsArray.forEach(
-        (char, currentIndex, array) => {
-            const charIsNumber = !isNaN(Number(char));
-            if (firstArgument === '') {
-                if (charIsNumber || (char === '-' || char === '+')) {
-                    firstArgument += char;
-                }
-
-                throw Error('Syntax error!!!'); // TODO
-            } else {
-                if (firstOperator === '' && !charIsNumber) {
-                    firstOperator = char;
-                } else if (firstOperator === '' && charIsNumber) {
-                    firstArgument += char;
-                } else if (charIsNumber && secondArgument === '') {
-                    secondArgument += char;
-                } else if (charIsNumber) {
-                    thirdArgument += char;
-                } else {
-                    if (secondArgument !== '' && secondOperator === '') {
-                        secondOperator += char;
-                        throw Error('Syntax error!!!'); // TODO
-                    }
-
-                    if (positionOfPrioritisedOperator(firstOperator, secondOperator) === 1) {
-                        firstArgument = calculateTwoNumbers(firstArgument, secondArgument, firstOperator);
-                        secondArgument = '';
-                        firstOperator = secondOperator;
-                        secondOperator = '';
-                    } else {
-                        secondArgument = calculateTwoNumbers(secondArgument, thirdArgument, secondOperator);
-                        thirdArgument = '';
-                        secondOperator = char;
-
-                        if (positionOfPrioritisedOperator(firstOperator, secondOperator) === 1) {
-                            firstArgument = calculateTwoNumbers(firstArgument, secondArgument, firstOperator);
-                            secondArgument = '';
-                            firstOperator = secondOperator;
-                            secondOperator = '';
-                        } else {
-                            // TODO
-                        }
-                    }
-                }
+    let lastWas = '';
+    for (let currentIndex = 0; currentIndex < charsArray.length; currentIndex++) {
+        const char = charsArray[currentIndex];
+        const charIsNumber = !isNaN(Number(char));
+        if (charIsNumber) {
+            if (lastWas === 'argument') {
+                arguments[arguments.length - 1] += char
             }
-        }
-    );
 
-    return calculateTwoNumbers(firstArgument, secondArgument, firstOperator);
+            if (lastWas === 'operator' || lastWas === '') {
+                arguments[arguments.length] = char;
+                lastWas = 'argument';
+            }
+        } else {
+            if (lastWas === 'argument') {
+                operators[operators.length] = char;
+                lastWas = 'operator';
+                continue;
+            }
+
+            if (char === '-' && (lastWas === 'operator' || lastWas === '')) {
+                arguments[arguments.length] = char;
+                lastWas = 'argument';
+                continue;
+            }
+
+            return NaN;
+        }
+    }
+
+    if (lastWas === 'operator') {
+        return NaN;
+    }
+
+    return calculateArraysOfArgumentsAndOperators(arguments, operators);
 }
 
 function calculateTwoNumbers(first, second, operator) {
@@ -126,16 +122,55 @@ function calculateTwoNumbers(first, second, operator) {
         case '*':
             return Number(first) * Number(second);
         case '/':
-            return Number(first) / Number(second); // TODO check division with zero
+            return Number(first) / Number(second);
         default:
-            return 0;
+            return NaN;
     }
 }
 
 function positionOfPrioritisedOperator(first, second) {
-    if (second === '*' || second === '/') {
-        if (first === '*' || first === '/') return first;
-        return 2;
-    }
+    if (first === '*' || first === '/') return 1;
+    if (second === '*' || second === '/') return 2;
     return 1;
 }
+
+function calculateArraysOfArgumentsAndOperators(arguments = [], operators = []) {
+    console.log('arguments: ', arguments)
+    console.log('operators: ', operators)
+    if (operators.length === 0 && (arguments.length === 0 || arguments.length > 1)) {
+        return NaN;
+    }
+
+    if (arguments.length === 1 && operators.length === 0) {
+        return Number(arguments[0]);
+    }
+
+    if (arguments.length - operators.length === 1) {
+        const reverseArguments = arguments.reverse();
+        const reverseOperators = operators.reverse();
+
+        let firstArgument = reverseArguments.pop();
+        let secondArgument = reverseArguments.pop();
+        let firstOperator = reverseOperators.pop();
+        let secondOperator = reverseOperators.pop();
+
+        while (firstArgument && secondArgument) {
+            if (positionOfPrioritisedOperator(firstOperator, secondOperator) === 1) {
+                firstArgument = calculateTwoNumbers(firstArgument, secondArgument, firstOperator).toString();
+                secondArgument = reverseArguments.pop();
+                firstOperator = secondOperator;
+                secondOperator = reverseOperators.pop();
+            } else {
+                const thirdArgument = reverseArguments.pop();
+                secondArgument = calculateTwoNumbers(secondArgument, thirdArgument, secondOperator).toString();
+                secondOperator = reverseOperators.pop();
+            }
+        }
+
+        return Number(firstArgument);
+    }
+
+    return NaN
+}
+
+console.log('Custom: ', calculateCharsArrayWithBrackets(clearString.split('')))
