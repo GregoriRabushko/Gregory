@@ -1,3 +1,14 @@
+// import * as foo from "./index";
+// import fun from "./index";
+
+import {calculateExpressionFromString} from "./index.js";
+import variable, {CONSTANTA} from './second.js';
+
+console.log('From previous file: ', calculateExpressionFromString('5+2'));
+console.log('From second: ', variable);
+
+console.dir('CONSTANTA - BUG: ', CONSTANTA)
+
 const setResult = function (result = 0) {
     if (result === "") {
         document.getElementById("resultField").innerText = result;
