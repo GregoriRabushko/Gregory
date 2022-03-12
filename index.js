@@ -1,17 +1,16 @@
-// const rawString = 'alert("OOPs!")';
+// const a = 'alert("OOPs!")';
 
-// import {CONSTANTA} from './second.js';
+import {CONSTANTA} from './second.js';
 
-// CONSTANTA.foo = ''; // WILL BE BUG!!!
+CONSTANTA.foo = ''; // WILL BE BUG!!!
 
-const rawString = '55*(22-2)/2+(5/((-8)-2)*(-3))'
+const rawString = '5.5*(2.2-2)/2+(5/((-8)-2)*(-3))'
 const clearString = rawString.replace(/\s+/, '');
 console.log(clearString);
 
 
-function calculateExpressionFromString(inputData) {
-// export function calculateExpressionFromString(inputData) {
-    const validator = new RegExp(/^(\d|\+|-|\*|\/|\(|\))+$/g);
+export function calculateExpressionFromString(inputData) {
+    const validator = new RegExp(/^(\d|\+|-|\*|\/|\(|\)|\.)+$/g);
     if (validator.test(inputData)) {
         return eval(inputData);
     }
@@ -94,7 +93,7 @@ function calculateCharsArrayWithoutBrackets(charsArray = []) {
         const charIsNumber = !isNaN(Number(char));
         if (charIsNumber) {
             if (lastWas === 'argument') {
-                argumentsArray[argumentsArray.length - 1] += char
+                argumentsArray[argumentsArray.length - 1] += char;
             }
 
             if (lastWas === 'operator' || lastWas === '') {
@@ -103,6 +102,17 @@ function calculateCharsArrayWithoutBrackets(charsArray = []) {
             }
         } else {
             if (lastWas === 'argument') {
+                if (char === '.') {
+                     if (argumentsArray[argumentsArray.length - 1].includes(char)) {
+                         return  NaN;
+                     }
+                    argumentsArray[argumentsArray.length - 1] += char;
+                    continue
+                }
+
+                if (argumentsArray[argumentsArray.length - 1].endsWith('.')) {
+                    return  NaN;
+                }
                 operators[operators.length] = char;
                 lastWas = 'operator';
                 continue;
